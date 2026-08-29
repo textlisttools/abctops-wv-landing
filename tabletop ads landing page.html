@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABCTOPS WV — Reserve Your Ad Slot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Archivo:wght@400;500;600;700&display=swap');
+
+  :root{
+    --walnut:#241812;
+    --walnut-2:#2f2117;
+    --brass:#B8892E;
+    --brass-light:#D9AE5C;
+    --parchment:#EFE6D6;
+    --parchment-2:#F7F1E6;
+    --ember:#C4522A;
+    --ink:#2A211B;
+    --line: rgba(239,230,214,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--parchment-2);
+    color:var(--ink);
+    font-family:'Archivo', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--walnut);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    color:var(--parchment);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:20px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--brass);}
+  .nav-cta{
+    background:var(--brass);
+    color:var(--walnut);
+    font-weight:700;
+    font-size:14px;
+    padding:9px 18px;
+    border-radius:3px;
+    text-decoration:none;
+    transition:background .15s ease;
+  }
+  .nav-cta:hover{background:var(--brass-light);}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 20% -10%, rgba(184,137,46,0.16), transparent 60%),
+      var(--walnut);
+    color:var(--parchment);
+    padding:76px 0 64px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--brass-light);
+    border:1px solid rgba(217,174,92,0.35);
+    padding:6px 12px; border-radius:999px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 54px);
+    line-height:1.06;
+    font-weight:600;
+    color:var(--parchment);
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--brass-light);
+  }
+  .hero p.sub{
+    margin-top:20px;
+    font-size:18px;
+    line-height:1.55;
+    color:rgba(239,230,214,0.78);
+    max-width:46ch;
+  }
+  .hero-actions{
+    margin-top:32px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--ember);
+    color:var(--parchment);
+    font-weight:700;
+    font-size:16px;
+    padding:15px 26px;
+    border-radius:3px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:#a8451f; transform:translateY(-1px);}
+  .hero-note{font-size:14px; color:rgba(239,230,214,0.55);}
+
+  /* ---------- TABLETOP MOCKUP (signature element) ---------- */
+  .table-mock{
+    position:relative;
+    border-radius:10px;
+    padding:22px;
+    background:
+      repeating-linear-gradient(100deg, #5a3d24 0px, #5a3d24 2px, #4a3019 3px, #4a3019 40px),
+      linear-gradient(160deg, #6b492a, #3d2814);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(0,0,0,0.3);
+    transform:rotate(-1.2deg);
+  }
+  .table-mock::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:10px;
+    background:linear-gradient(115deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 30%);
+    pointer-events:none;
+  }
+  .tile-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+  }
+  .tile{
+    background:var(--parchment);
+    border-radius:4px;
+    padding:14px 10px;
+    min-height:74px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    box-shadow:0 3px 0 rgba(0,0,0,0.25);
+  }
+  .tile .tname{font-family:'Fraunces', serif; font-weight:600; font-size:12.5px; color:var(--ink);}
+  .tile .ttag{font-size:9.5px; color:#8a7c68; margin-top:3px; letter-spacing:0.03em; text-transform:uppercase;}
+  .tile.open{
+    background:transparent;
+    border:2px dashed var(--brass-light);
+    box-shadow:none;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  .tile.open .tname{color:var(--brass-light); font-size:12px;}
+  @keyframes pulse{
+    0%,100%{border-color:rgba(217,174,92,0.4); background:rgba(217,174,92,0.03);}
+    50%{border-color:rgba(217,174,92,0.9); background:rgba(217,174,92,0.10);}
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .table-mock{transform:none; order:-1;}
+  }
+
+  /* ---------- STAT BAR ---------- */
+  .statbar{
+    background:var(--brass);
+    color:var(--walnut);
+  }
+  .statbar .wrap{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    padding:26px 28px;
+  }
+  .stat{text-align:center;}
+  .stat .num{font-family:'Fraunces', serif; font-weight:700; font-size:30px; line-height:1;}
+  .stat .lbl{font-size:12.5px; font-weight:600; letter-spacing:0.03em; text-transform:uppercase; margin-top:6px; opacity:0.85;}
+  @media (max-width:700px){ .statbar .wrap{grid-template-columns:1fr; gap:18px;} }
+
+  /* ---------- HOW IT WORKS ---------- */
+  section.how{padding:84px 0 72px;}
+  .section-head{max-width:640px; margin:0 0 48px;}
+  .section-head .kicker{
+    font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--brass);
+    margin-bottom:10px; display:block;
+  }
+  .section-head h2{font-size:clamp(26px,3.2vw,36px); line-height:1.15; font-weight:600;}
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(36,24,18,0.1);
+    border:1px solid rgba(36,24,18,0.1);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .step{
+    background:var(--parchment-2);
+    padding:30px 26px;
+  }
+  .step .marker{
+    font-family:'Fraunces', serif;
+    font-size:14px; font-weight:600;
+    color:var(--brass);
+    border:1px solid rgba(184,137,46,0.4);
+    width:30px; height:30px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .step h3{font-size:18px; font-weight:600; margin-bottom:8px;}
+  .step p{font-size:14.5px; line-height:1.55; color:#5a4d3f; margin:0;}
+  @media (max-width:800px){ .steps{grid-template-columns:1fr;} }
+
+  /* ---------- WHY ---------- */
+  section.why{
+    background:var(--walnut-2);
+    color:var(--parchment);
+    padding:76px 0;
+  }
+  section.why .section-head h2{color:var(--parchment);}
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px 40px;
+  }
+  .why-item{
+    display:flex; gap:14px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .why-item .ico{
+    flex:0 0 auto;
+    width:34px; height:34px;
+    border-radius:6px;
+    background:rgba(184,137,46,0.15);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--brass-light);
+    font-family:'Fraunces', serif; font-weight:700; font-size:15px;
+  }
+  .why-item h4{font-size:16px; font-weight:600; margin:0 0 5px; color:var(--parchment);}
+  .why-item p{font-size:14px; line-height:1.5; margin:0; color:rgba(239,230,214,0.68);}
+  @media (max-width:700px){ .why-grid{grid-template-columns:1fr;} }
+
+  /* ---------- FORM ---------- */
+  section.lead{
+    padding:84px 0 100px;
+    background:
+      radial-gradient(ellipse 700px 400px at 85% 0%, rgba(196,82,42,0.06), transparent 60%),
+      var(--parchment-2);
+  }
+  .lead-card{
+    max-width:640px; margin:0 auto;
+    background:#fff;
+    border:1px solid rgba(36,24,18,0.1);
+    border-radius:10px;
+    box-shadow:0 20px 50px -25px rgba(36,24,18,0.25);
+    overflow:hidden;
+  }
+  .lead-card-head{
+    background:var(--walnut);
+    color:var(--parchment);
+    padding:30px 34px;
+  }
+  .lead-card-head h2{font-size:24px; font-weight:600;}
+  .lead-card-head p{margin:8px 0 0; font-size:14.5px; color:rgba(239,230,214,0.7);}
+  form{padding:30px 34px 34px;}
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:6px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;
+    font-family:'Archivo', sans-serif;
+    font-size:15px;
+    padding:11px 13px;
+    border:1px solid #d8cdb8;
+    border-radius:4px;
+    background:var(--parchment-2);
+    color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--brass);
+    outline-offset:1px;
+    background:#fff;
+  }
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:520px){ .field-row{grid-template-columns:1fr;} }
+  textarea{resize:vertical; min-height:70px;}
+  .submit-btn{
+    width:100%;
+    background:var(--ember);
+    color:#fff;
+    font-weight:700;
+    font-size:16px;
+    padding:14px;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .submit-btn:hover{background:#a8451f;}
+  .form-note{
+    font-size:12.5px; color:#8a7c68; margin-top:12px; text-align:center;
+  }
+  .success{
+    display:none;
+    padding:50px 34px;
+    text-align:center;
+  }
+  .success .mark{
+    width:52px; height:52px; border-radius:50%;
+    background:rgba(184,137,46,0.15);
+    color:var(--brass);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 18px;
+    font-size:24px;
+  }
+  .success h3{font-size:21px; font-weight:600; margin-bottom:8px;}
+  .success p{font-size:14.5px; color:#5a4d3f; max-width:36ch; margin:0 auto;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--walnut);
+    color:rgba(239,230,214,0.5);
+    padding:26px 0;
+    font-size:13px;
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>ABCTOPS&nbsp;WV</div>
+    <a class="nav-cta" href="#reserve">Reserve a slot</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Now placing ads — [Restaurant Name], [Town]</span>
+      <h1>Your ad, <em>18 inches</em><br>from every customer's face.</h1>
+      <p class="sub">Not a 30-second spot. Not a scroll-past. A permanent ad slot on the tables at [Restaurant Name] — paid once, placed for three years.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#reserve">Reserve my slot →</a>
+        <span class="hero-note">Limited slots — table space is finite</span>
+      </div>
+    </div>
+    <div class="table-mock">
+      <div class="tile-grid">
+        <div class="tile"><div class="tname">Coleman Plumbing</div><div class="ttag">Reserved</div></div>
+        <div class="tile"><div class="tname">Ridge HVAC</div><div class="ttag">Reserved</div></div>
+        <div class="tile open"><div class="tname">Your Ad Here</div></div>
+        <div class="tile"><div class="tname">Maple St. Dental</div><div class="ttag">Reserved</div></div>
+        <div class="tile"><div class="tname">Hart Realty Co.</div><div class="ttag">Reserved</div></div>
+        <div class="tile"><div class="tname">Bright Salon</div><div class="ttag">Reserved</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="statbar">
+  <div class="wrap">
+    <div class="stat"><div class="num">30–45 min</div><div class="lbl">Average time on table</div></div>
+    <div class="stat"><div class="num">3 years</div><div class="lbl">Placement, one payment</div></div>
+    <div class="stat"><div class="num">~25–30</div><div class="lbl">Businesses per table, met at kickoff</div></div>
+  </div>
+</div>
+
+<section class="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>From reserved slot to installed ad in three steps.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="marker">1</div>
+        <h3>Reserve your slot</h3>
+        <p>Fill out the form below with your business info. We'll hold a slot on the table and follow up with sizing and pricing.</p>
+      </div>
+      <div class="step">
+        <div class="marker">2</div>
+        <h3>Send your ad details</h3>
+        <p>Logo, contact info, and any offer or coupon you want featured. We handle the design and layout for you.</p>
+      </div>
+      <div class="step">
+        <div class="marker">3</div>
+        <h3>Installed &amp; live</h3>
+        <p>Your ad is built into the table permanently, in front of every guest who sits down, for the next three years.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Why this works</span>
+      <h2>An ad that can't be skipped, muted, or scrolled past.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="ico">1</div>
+        <div><h4>Captive attention</h4><p>Customers sit with your ad in front of them for the length of their meal — no competing tabs, no swipe-away.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="ico">2</div>
+        <div><h4>One cost, no recurring bill</h4><p>Pay once for three years of placement. No monthly ad spend, no bidding, no budget to manage.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="ico">3</div>
+        <div><h4>A real local network</h4><p>Meet the other businesses on the table at the install kickoff — many advertisers say the referrals alone cover the cost.</p></div>
+      </div>
+      <div class="why-item">
+        <div class="ico">4</div>
+        <div><h4>Real, high-traffic location</h4><p>[Restaurant Name] is one of the busiest lunch spots in [Town/Area] — this isn't a guess at foot traffic.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lead" id="reserve">
+  <div class="wrap">
+    <div class="lead-card">
+      <div class="lead-card-head">
+        <h2>Reserve your table slot</h2>
+        <p>Takes under a minute. We'll follow up with sizing, artwork specs, and pricing.</p>
+      </div>
+
+      <form id="leadForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="business">Business name</label>
+            <input type="text" id="business" name="business" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="industry">What kind of business?</label>
+          <select id="industry" name="industry">
+            <option>Home services (plumbing, HVAC, electrical)</option>
+            <option>Health &amp; wellness (dental, chiropractic, salon)</option>
+            <option>Real estate</option>
+            <option>Retail / restaurant</option>
+            <option>Professional services (legal, financial, insurance)</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Anything you'd like us to know? (optional)</label>
+          <textarea id="message" name="message" placeholder="e.g. preferred slot size, questions about pricing"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Reserve my slot</button>
+        <p class="form-note">No payment required to reserve — we'll confirm details before anything is final.</p>
+      </form>
+
+      <div class="success" id="successState">
+        <div class="mark">✓</div>
+        <h3>Slot request received</h3>
+        <p>We'll reach out within 1–2 business days with sizing, artwork specs, and pricing for your table slot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  ABCTOPS WV — Tabletop Advertising at [Restaurant Name] · [Your Name] · [Phone] · [Email]
+</footer>
+
+<script>
+  document.getElementById('leadForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    // Capture lead data — wire this up to your email/CRM of choice.
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    console.log('Lead captured:', data);
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
