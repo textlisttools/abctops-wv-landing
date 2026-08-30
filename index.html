@@ -140,44 +140,20 @@
     height:360px;
     object-fit:cover;
   }
-  .hero-photo::after{
-    content:"";
-    position:absolute; inset:0;
-    background:linear-gradient(0deg, rgba(20,33,61,0.88) 0%, rgba(20,33,61,0.25) 42%, rgba(20,33,61,0) 62%);
-    pointer-events:none;
-  }
-  .hero-photo .credit{
-    position:absolute; bottom:8px; right:12px; z-index:2;
-    font-size:10px; color:rgba(255,255,255,0.6);
-  }
-  .hero-photo .credit a{color:inherit; text-decoration:underline;}
-  .tile-grid{
-    position:absolute; left:16px; right:16px; bottom:16px; z-index:1;
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:8px;
-  }
-  .tile{
-    background:var(--parchment);
-    border-radius:4px;
-    padding:10px 8px;
-    min-height:58px;
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    text-align:center;
-    box-shadow:0 3px 8px -2px rgba(0,0,0,0.4);
-  }
-  .tile .tname{font-family:'Fraunces', serif; font-weight:600; font-size:12.5px; color:var(--ink);}
-  .tile .ttag{font-size:9.5px; color:#5A6B85; margin-top:3px; letter-spacing:0.03em; text-transform:uppercase;}
-  .tile.open{
+  .open-tile{
+    position:absolute; left:54%; bottom:9%; z-index:1;
+    transform:translateX(-50%) rotate(-2deg);
     background:#fff;
     border:2px dotted var(--ember);
-    box-shadow:0 3px 8px -2px rgba(0,0,0,0.4);
+    border-radius:4px;
+    padding:8px 14px;
+    box-shadow:0 6px 14px -4px rgba(0,0,0,0.5);
     animation:pulse 2.4s ease-in-out infinite;
   }
-  .tile.open .tname{color:var(--ember); font-size:12px; font-weight:700;}
+  .open-tile .tname{font-family:'Fraunces', serif; font-weight:700; font-size:13px; color:var(--ember); white-space:nowrap;}
   @keyframes pulse{
-    0%,100%{border-color:rgba(192,32,44,0.5); box-shadow:0 3px 8px -2px rgba(0,0,0,0.4);}
-    50%{border-color:rgba(192,32,44,1); box-shadow:0 0 0 4px rgba(192,32,44,0.15), 0 3px 8px -2px rgba(0,0,0,0.4);}
+    0%,100%{border-color:rgba(192,32,44,0.5); box-shadow:0 6px 14px -4px rgba(0,0,0,0.5);}
+    50%{border-color:rgba(192,32,44,1); box-shadow:0 0 0 4px rgba(192,32,44,0.18), 0 6px 14px -4px rgba(0,0,0,0.5);}
   }
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
@@ -373,16 +349,8 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="https://images.unsplash.com/photo-1767769354554-efeaa233f697?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;q=80&amp;w=1200" alt="Retro diner booth with checkered floor" loading="lazy" width="1200" height="800">
-      <div class="tile-grid">
-        <div class="tile"><div class="tname">Coleman Plumbing</div><div class="ttag">Reserved</div></div>
-        <div class="tile"><div class="tname">Ridge HVAC</div><div class="ttag">Reserved</div></div>
-        <div class="tile open"><div class="tname">Your Ad Here</div></div>
-        <div class="tile"><div class="tname">Maple St. Dental</div><div class="ttag">Reserved</div></div>
-        <div class="tile"><div class="tname">Hart Realty Co.</div><div class="ttag">Reserved</div></div>
-        <div class="tile"><div class="tname">Bright Salon</div><div class="ttag">Reserved</div></div>
-      </div>
-      <span class="credit">Photo by <a href="https://unsplash.com/@tanyabarrow?utm_source=abctopswv&amp;utm_medium=referral" target="_blank" rel="noopener">T</a> on <a href="https://unsplash.com/?utm_source=abctopswv&amp;utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></span>
+      <img src="hero-diner.jpg" alt="Diner booth table covered edge-to-edge with local business ads" loading="lazy" width="1100" height="660">
+      <div class="open-tile"><div class="tname">Your Ad Here</div></div>
     </div>
   </div>
 </header>
