@@ -140,22 +140,6 @@
     height:360px;
     object-fit:cover;
   }
-  .open-tile{
-    position:absolute; left:54%; bottom:9%; z-index:1;
-    transform:translateX(-50%) rotate(-2deg);
-    width:82px; height:82px;
-    display:flex; align-items:center; justify-content:center;
-    background:#fff;
-    border:2px dotted var(--ember);
-    border-radius:4px;
-    box-shadow:0 6px 14px -4px rgba(0,0,0,0.5);
-    animation:pulse 2.4s ease-in-out infinite;
-  }
-  .open-tile .tname{font-family:'Fraunces', serif; font-weight:700; font-size:12px; line-height:1.25; color:var(--ember); text-align:center;}
-  @keyframes pulse{
-    0%,100%{border-color:rgba(192,32,44,0.5); box-shadow:0 6px 14px -4px rgba(0,0,0,0.5);}
-    50%{border-color:rgba(192,32,44,1); box-shadow:0 0 0 4px rgba(192,32,44,0.18), 0 6px 14px -4px rgba(0,0,0,0.5);}
-  }
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
     .hero-photo{transform:none; order:-1;}
@@ -350,8 +334,7 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="hero-diner.jpg" alt="Diner booth table covered edge-to-edge with local business ads" loading="lazy" width="1100" height="660">
-      <div class="open-tile"><div class="tname">Your Ad Here</div></div>
+      <img src="hero-diner.jpg" alt="Diner booth table covered edge-to-edge with Your Ad Here ad slots around a centered ABC Tops WV logo" loading="lazy" width="1084" height="705">
     </div>
   </div>
 </header>
