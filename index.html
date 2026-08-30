@@ -143,14 +143,15 @@
   .open-tile{
     position:absolute; left:54%; bottom:9%; z-index:1;
     transform:translateX(-50%) rotate(-2deg);
+    width:82px; height:82px;
+    display:flex; align-items:center; justify-content:center;
     background:#fff;
     border:2px dotted var(--ember);
     border-radius:4px;
-    padding:8px 14px;
     box-shadow:0 6px 14px -4px rgba(0,0,0,0.5);
     animation:pulse 2.4s ease-in-out infinite;
   }
-  .open-tile .tname{font-family:'Fraunces', serif; font-weight:700; font-size:13px; color:var(--ember); white-space:nowrap;}
+  .open-tile .tname{font-family:'Fraunces', serif; font-weight:700; font-size:12px; line-height:1.25; color:var(--ember); text-align:center;}
   @keyframes pulse{
     0%,100%{border-color:rgba(192,32,44,0.5); box-shadow:0 6px 14px -4px rgba(0,0,0,0.5);}
     50%{border-color:rgba(192,32,44,1); box-shadow:0 0 0 4px rgba(192,32,44,0.18), 0 6px 14px -4px rgba(0,0,0,0.5);}
