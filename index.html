@@ -408,7 +408,7 @@
         <p>Takes under a minute. We'll follow up with sizing, artwork specs, and pricing.</p>
       </div>
 
-      <form id="leadForm">
+      <form id="leadForm" action="https://formspree.io/f/meaqkyap" method="POST">
         <div class="field-row">
           <div class="field">
             <label for="name">Full name</label>
@@ -445,6 +445,7 @@
           <textarea id="message" name="message" placeholder="e.g. preferred slot size, questions about pricing"></textarea>
         </div>
         <button type="submit" class="submit-btn">Reserve my slot</button>
+        <p class="form-note" id="formError" hidden style="color:var(--ember);">Something went wrong sending your request — please try again, or call/text us directly.</p>
         <p class="form-note">No payment required to reserve — we'll confirm details before anything is final.</p>
       </form>
 
@@ -462,13 +463,31 @@
 </footer>
 
 <script>
-  document.getElementById('leadForm').addEventListener('submit', function(e){
+  const leadForm = document.getElementById('leadForm');
+  leadForm.addEventListener('submit', async function(e){
     e.preventDefault();
-    // Capture lead data — wire this up to your email/CRM of choice.
-    const data = Object.fromEntries(new FormData(e.target).entries());
-    console.log('Lead captured:', data);
-    document.getElementById('leadForm').style.display = 'none';
-    document.getElementById('successState').style.display = 'block';
+    const errorNote = document.getElementById('formError');
+    errorNote.hidden = true;
+    const submitBtn = leadForm.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    try {
+      const response = await fetch(leadForm.action, {
+        method: 'POST',
+        body: new FormData(leadForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        leadForm.style.display = 'none';
+        document.getElementById('successState').style.display = 'block';
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      errorNote.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Reserve my slot';
+    }
   });
 </script>
 
